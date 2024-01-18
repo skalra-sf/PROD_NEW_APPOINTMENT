@@ -1,0 +1,68 @@
+<head></head>
+<body>
+    <script src="https://ace-aaa.my.site.com/prospects/lightning/lightning.out.js"></script>
+
+<script>
+
+    var urlParams = new URLSearchParams(window.location.search);
+    var websiteSource = urlParams.get('websiteSource');
+    var trafficSource = urlParams.get('trafficSource');
+    var trafficSourceCategory = urlParams.get('trafficSourceCategory');
+    var TSTTripURL = urlParams.get('TSTTripURL');
+    var tripCanvasURL = urlParams.get('tripCanvasURL');
+    var clubCode = urlParams.get('clubCode');
+    
+    $Lightning.use("runtime_appointmentbooking:lightningOutGuest",
+        function() {                  // Callback once framework and app load
+            $Lightning.createComponent(
+                "lightning:flow",    // top-level component of your app
+                {},    // attributes to set on the component when created
+                "lexcontainer",    // the DOM location to insert the component
+                function(component) {           
+                    console.log('Hi from callback');
+
+                     var inputVariables = [
+                        {
+                            name: "WebsiteSource",
+                            type: "String",
+                            value: websiteSource
+                        },
+                        {
+                            name: "TrafficSource",
+                            type: "String",
+                            value: trafficSource
+                        },
+                        {
+                            name: "TrafficSourceCategory",
+                            type: "String",
+                            value: trafficSourceCategory
+                        },
+                        {
+                            name: "TripCanvasURL",
+                            type: "String",
+                            value: tripCanvasURL
+                        },
+                        {
+                            name: "TSTUrl",
+                            type: "String",
+                            value: TSTTripURL
+                        },
+                        {
+                            name: "ClubCode",
+                            type: "String",
+                            value: clubCode
+                        }
+                    ] 
+
+                    component.startFlow("Inbound_New_Guest_Appointment_Travel", inputVariables);
+                }
+            );
+        },    'https://ace-aaa.my.site.com/prospects',  // Site endpoint
+                'session-id'
+    );
+</script>
+<div id="lexcontainer">
+
+<p> PROD NEW </p>
+</div>
+</body>
